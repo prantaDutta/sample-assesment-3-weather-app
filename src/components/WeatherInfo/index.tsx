@@ -1,17 +1,17 @@
 import React, { ReactNode } from 'react'
 import { Avatar, Box, Typography } from '@mui/material'
-import { useAxios } from '../../hooks/useAxios'
+import useAxios from '../../hooks/useAxios'
 import { WEATHER_STACK_API } from '../../util/constants'
 import { IWeatherResponse } from '../../types/weatherResponse'
 import { CenteredCircularProgress } from '../CenteredCircularProgress'
 import { ShowErrorMessage } from '../ShowErrorMessage'
 
-interface CapitalInfoProps {
+interface WeatherInfoProps {
   children?: ReactNode
   capital: string
 }
 
-export const CapitalInfo: React.FC<CapitalInfoProps> = ({ capital }) => {
+export const WeatherInfo: React.FC<WeatherInfoProps> = ({ capital }) => {
   const { data, loading, error } = useAxios<IWeatherResponse | null>(
     `${WEATHER_STACK_API}&query=${capital}`
   )
@@ -24,7 +24,7 @@ export const CapitalInfo: React.FC<CapitalInfoProps> = ({ capital }) => {
       )}
 
       {data?.current && (
-        <Box>
+        <Box role="WeatherData">
           <Avatar
             alt={'Weather Icon'}
             src={data.current.weather_icons[0]}

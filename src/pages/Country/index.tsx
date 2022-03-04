@@ -1,11 +1,11 @@
 import React, { ReactNode, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useAxios } from '../../hooks/useAxios'
+import useAxios from '../../hooks/useAxios'
 import { Avatar, Box, Button, Typography } from '@mui/material'
 import { CenteredCircularProgress } from '../../components/CenteredCircularProgress'
 import { ICountry } from '../../types/Country'
-import { CapitalInfo } from '../../components/CapitalInfo'
 import { ShowErrorMessage } from '../../components/ShowErrorMessage'
+import { WeatherInfo } from '../../components/WeatherInfo'
 
 interface CountryProps {
   children?: ReactNode
@@ -20,7 +20,7 @@ export const Country: React.FC<CountryProps> = () => {
     `https://restcountries.com/v3.1/name/${state.country}`
   )
 
-  const [showCapitalData, setShowCapitalData] = useState(false)
+  const [showWeather, setShowWeather] = useState(false)
 
   const navigate = useNavigate()
   return (
@@ -58,15 +58,15 @@ export const Country: React.FC<CountryProps> = () => {
           <Typography>Total Population: {data[0].population}</Typography>
 
           <Button
-            onClick={() => setShowCapitalData(!showCapitalData)}
+            onClick={() => setShowWeather(!showWeather)}
             color="primary"
             variant="contained"
             sx={{ my: 2 }}
           >
-            {showCapitalData ? 'Hide Capital Weather' : 'Show Capital Weather'}
+            {showWeather ? 'Hide Capital Weather' : 'Show Capital Weather'}
           </Button>
 
-          {showCapitalData && <CapitalInfo capital={data[0].capital} />}
+          {showWeather && <WeatherInfo capital={data[0].capital} />}
         </Box>
       )}
     </Box>

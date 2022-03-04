@@ -10,7 +10,7 @@ export const ShowErrorMessage: React.FC<ShowErrorMessageProps> = ({
   errorMsg = 'Something Went Wrong',
 }) => {
   return (
-    <Box>
+    <Box role="ErrorMessage">
       <Typography sx={{ fontWeight: 700, fontSize: '30px', mt: 5 }}>
         {errorMsg}
       </Typography>

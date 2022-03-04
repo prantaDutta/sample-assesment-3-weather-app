@@ -12,6 +12,7 @@ export const CenteredCircularProgress = ({ loading = true }) => {
   }
   return (
     <Box
+      role="Loader"
       sx={{
         display: 'flex',
         justifyContent: 'center',
