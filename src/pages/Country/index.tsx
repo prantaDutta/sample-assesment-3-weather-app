@@ -6,6 +6,7 @@ import { CenteredCircularProgress } from '../../components/CenteredCircularProgr
 import { ICountry } from '../../types/Country'
 import { ShowErrorMessage } from '../../components/ShowErrorMessage'
 import { WeatherInfo } from '../../components/WeatherInfo'
+import { COUNTRIES_API } from '../../util/constants'
 
 interface CountryProps {
   children?: ReactNode
@@ -17,7 +18,7 @@ export const Country: React.FC<CountryProps> = () => {
     return <Typography>Something Went Wrong. Please Try again</Typography>
   }
   const { data, loading, error } = useAxios<ICountry[]>(
-    `https://restcountries.com/v3.1/name/${state.country}`
+    `${COUNTRIES_API}${state.country}`
   )
 
   const [showWeather, setShowWeather] = useState(false)
@@ -28,7 +29,7 @@ export const Country: React.FC<CountryProps> = () => {
       <CenteredCircularProgress loading={loading} />
       {error && <ShowErrorMessage errorMsg={'Invalid Country Name'} />}
       {data && (
-        <Box>
+        <Box role="CountryData">
           <Box sx={{ display: 'flex', alignItems: 'center', my: 5, gap: 2 }}>
             <Button
               variant="contained"

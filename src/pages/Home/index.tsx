@@ -1,15 +1,20 @@
-import { Alert, Box, Button, TextField, Typography } from '@mui/material'
+import {
+  Box,
+  Button,
+  FormControl,
+  Input,
+  InputLabel,
+  Typography,
+} from '@mui/material'
 import React, { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export const Home: React.FC = () => {
   const navigate = useNavigate()
-  const [error, setError] = useState(false)
   const [country, setCountry] = useState('')
 
   const handleSubmit = (e: FormEvent<HTMLInputElement>) => {
     e.preventDefault()
-    setError(!country)
     console.log('country: ', country)
     navigate('/country', {
       state: { country },
@@ -22,21 +27,20 @@ export const Home: React.FC = () => {
       </Typography>
 
       <Box component={'form'} onSubmit={handleSubmit}>
-        {error && (
-          <Alert sx={{ my: 2 }} severity="error">
-            Please Type the Country Name
-          </Alert>
-        )}
-        <TextField
-          fullWidth
-          id="country"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-          label="Enter Country"
-          variant="filled"
-        />
+        <FormControl fullWidth variant="outlined" sx={{ my: 2 }}>
+          <InputLabel htmlFor="country">Enter Country</InputLabel>
+          <Input
+            sx={{ px: 2 }}
+            fullWidth
+            role="TextField"
+            id="country"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+          />
+        </FormControl>
 
         <Button
+          aria-label="Submit"
           type="submit"
           sx={{ my: 2 }}
           fullWidth
